@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title></title>
+      <link href="/2023/09/15/time/"/>
+      <url>/2023/09/15/time/</url>
+      
+        <content type="html"><![CDATA[<div class="timeline color]"><div class='timeline-item headline'><div class='timeline-item-title'><div class='item-circle'><p>时间线标题（可选）[</p></div></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>时间节点（标题）</p></div></div><div class='timeline-item-content'><p>正文内容</p></div></div><div class='timeline-item'><div class='timeline-item-title'><div class='item-circle'><p>时间节点（标题）</p></div></div><div class='timeline-item-content'><p>正文内容</p></div></div></div>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/2023/09/14/test/"/>
+      <url>/2023/09/14/test/</url>
+      
+        <content type="html"><![CDATA[<!doctype html><html><head><meta charset="utf-8"><title>HTML</title></head><body><p>要展示的图片：</p><img src="source/img/Default.jpg"></body></html>source/img/Default.jpg]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title></title>
+      <link href="/2023/09/14/shiping/"/>
+      <url>/2023/09/14/shiping/</url>
+      
+        <content type="html"><![CDATA[<div align=center class="aspect-ratio">    <iframe src="https://player.bilibili.com/player.html?aid=474023258&&page=1&as_wide=1&high_quality=1&danmaku=0"     scrolling="no"     border="0"     frameborder="no"     framespacing="0"     high_quality=1    danmaku=1     allowfullscreen="true">     </iframe></div>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>第一篇文章</title>
+      <link href="/2023/09/14/2023-9-14/"/>
+      <url>/2023/09/14/2023-9-14/</url>
+      
+        <content type="html"><![CDATA[<h2 id="this-is-my-first-blog-of-web-in-this-web-I-will"><a href="#this-is-my-first-blog-of-web-in-this-web-I-will" class="headerlink" title="this is my first blog of web in this web I will"></a>this is my first blog of web in this web I will</h2>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2023/09/14/hello-world/"/>
+      <url>/2023/09/14/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>A sunny day</title>
+      <link href="/2020/08/14/the-picture/"/>
+      <url>/2020/08/14/the-picture/</url>
+      
+        <content type="html"><![CDATA[<p>晴れた日より?菜が必要です。</p><p><img src="/../img/Default.jpg" alt="Alt text"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> daily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> weather </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
