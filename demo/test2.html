@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>心跳广播 · 二次元苹果风</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* 二次元装饰：浮动的爱心粒子 */
+    .bg-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      font-size: 24px;
+      opacity: 0.6;
+      animation: floatUp 8s infinite ease-in;
+      color: #ff6b9d;
+      text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0.5) rotate(0deg);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* 主卡片 - 苹果风毛玻璃 */
+    .card {
+      position: relative;
+      z-index: 1;
+      width: 90%;
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 36px;
+      padding: 30px 25px 35px;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      text-align: center;
+      color: #2c2c2e;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* 二次元角色装饰 */
+    .mascot {
+      font-size: 48px;
+      margin-bottom: 5px;
+      animation: gentleBounce 2s infinite ease-in-out;
+    }
+
+    @keyframes gentleBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: #6e6e73;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    /* 心率大数字 */
+    .heart-display {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 6px;
+      margin: 15px 0 10px;
+    }
+
+    #heart-rate-value {
+      font-size: 80px;
+      font-weight: 700;
+      background: linear-gradient(135deg, #ff6b9d, #c44dff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+
+    .bpm-unit {
+      font-size: 22px;
+      color: #8e8e93;
+      font-weight: 500;
+    }
+
+    .heart-icon {
+      font-size: 36px;
+      animation: heartbeat 1.2s ease-in-out infinite;
+      margin: 0 10px;
+    }
+
+    @keyframes heartbeat {
+      0%   { transform: scale(1); }
+      15%  { transform: scale(1.25); }
+      30%  { transform: scale(1); }
+      45%  { transform: scale(1.15); }
+      60%  { transform: scale(1); }
+    }
+
+    /* 波形图容器 */
+    .waveform-container {
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 10px;
+      margin: 25px 0 20px;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* 按钮组 */
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.7);
+      color: #333;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      border: 1px solid rgba(255,255,255,0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff6b9d, #c44dff);
+      color: white;
+      border: none;
+      box-shadow: 0 10px 20px rgba(198, 77, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 25px rgba(198, 77, 255, 0.4);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+      filter: grayscale(20%);
+    }
+
+    .status-text {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #6e6e73;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    /* 响应式调整 */
+    @media (max-width: 480px) {
+      .card {
+        padding: 25px 15px 30px;
+      }
+      #heart-rate-value {
+        font-size: 65px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 漂浮的爱心粒子（二次元氛围） -->
+  <div class="bg-particles" id="particles"></div>
+
+  <!-- 主卡片 -->
+  <div class="card">
+    <div class="mascot">🐱💖</div>
+    <h1>心跳广播</h1>
+    <div class="subtitle">
+      <span>✨ 实时心率监测 ✨</span>
+    </div>
+
+    <div class="heart-display">
+      <span class="heart-icon">❤️</span>
+      <span id="heart-rate-value">--</span>
+      <span class="bpm-unit">BPM</span>
+    </div>
+
+    <!-- 波形图画布 -->
+    <div class="waveform-container">
+      <canvas id="waveCanvas" width="350" height="120"></canvas>
+    </div>
+
+    <div class="button-group">
+      <button class="btn btn-primary" id="connect-btn" onclick="connectDevice()">
+        🔗 连接设备
+      </button>
+      <button class="btn" id="disconnect-btn" onclick="disconnectDevice()" disabled>
+        ⏹️ 断开
+      </button>
+    </div>
+
+    <div class="status-text" id="status">
+      <span>⚪</span> 等待连接
+    </div>
+  </div>
+
+  <script>
+    // ---------- 二次元背景粒子生成 ----------
+    (function createParticles() {
+      const container = document.getElementById('particles');
+      const emojis = ['💕', '🌸', '✨', '💖', '💗', '🩷', '🌟', '💫'];
+      for (let i = 0; i < 20; i++) {
+        const span = document.createElement('span');
+        span.classList.add('particle');
+        span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        span.style.left = Math.random() * 100 + '%';
+        span.style.animationDelay = Math.random() * 8 + 's';
+        span.style.fontSize = (Math.random() * 20 + 16) + 'px';
+        container.appendChild(span);
+      }
+    })();
+
+    // ---------- 波形图相关 ----------
+    const canvas = document.getElementById('waveCanvas');
+    const ctx = canvas.getContext('2d');
+    const maxDataPoints = 80;        // 画布上最多显示的点数
+    let heartRateHistory = [];       // 存储历史心率值
+
+    function drawWaveform() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // 绘制网格线（淡淡的苹果风格）
+      ctx.strokeStyle = 'rgba(0,0,0,0.05)';
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i <= 4; i++) {
+        const y = (canvas.height / 5) * i;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+      }
+
+      if (heartRateHistory.length === 0) {
+        // 提示文字
+        ctx.fillStyle = '#8e8e93';
+        ctx.font = '14px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('连接设备后显示实时波形', canvas.width / 2, canvas.height / 2);
+        return;
+      }
+
+      // 设定Y轴范围：通常心率在40-200之间，动态调整更佳
+      let minHR = 40;
+      let maxHR = 200;
+      if (heartRateHistory.length > 0) {
+        const actualMin = Math.min(...heartRateHistory);
+        const actualMax = Math.max(...heartRateHistory);
+        minHR = Math.min(actualMin - 10, 40);
+        maxHR = Math.max(actualMax + 10, 120);
+      }
+
+      const yRange = maxHR - minHR;
+      const xStep = canvas.width / (maxDataPoints - 1);
+
+      // 绘制渐变填充区域
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height);
+      
+      for (let i = 0; i < heartRateHistory.length; i++) {
+        const x = i * xStep;
+        const y = canvas.height - ((heartRateHistory[i] - minHR) / yRange) * canvas.height;
+        ctx.lineTo(x, y);
+      }
+      
+      ctx.lineTo((heartRateHistory.length - 1) * xStep, canvas.height);
+      ctx.closePath();
+      
+      // 二次元渐变填充
+      const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      gradient.addColorStop(0, 'rgba(255, 107, 157, 0.35)');
+      gradient.addColorStop(1, 'rgba(196, 77, 255, 0.1)');
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      // 绘制线条
+      ctx.beginPath();
+      ctx.strokeStyle = '#ff6b9d';
+      ctx.lineWidth = 2.5;
+      ctx.shadowColor = 'rgba(255, 107, 157, 0.6)';
+      ctx.shadowBlur = 6;
+      
+      for (let i = 0; i < heartRateHistory.length; i++) {
+        const x = i * xStep;
+        const y = canvas.height - ((heartRateHistory[i] - minHR) / yRange) * canvas.height;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+      
+      // 重置阴影
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      
+      // 画当前值圆点
+      if (heartRateHistory.length > 0) {
+        const lastX = (heartRateHistory.length - 1) * xStep;
+        const lastY = canvas.height - ((heartRateHistory[heartRateHistory.length - 1] - minHR) / yRange) * canvas.height;
+        ctx.beginPath();
+        ctx.arc(lastX, lastY, 4, 0, Math.PI * 2);
+        ctx.fillStyle = '#ff3b6e';
+        ctx.shadowColor = 'rgba(255, 59, 110, 0.8)';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.shadowColor = 'transparent';
+      }
+    }
+
+    function addHeartRateToWaveform(hr) {
+      heartRateHistory.push(hr);
+      if (heartRateHistory.length > maxDataPoints) {
+        heartRateHistory.shift();
+      }
+      drawWaveform();
+    }
+
+    // 初始绘制空白波形
+    drawWaveform();
+
+    // ---------- 蓝牙心率监测 ----------
+    let device, characteristic;
+
+    async function connectDevice() {
+      try {
+        if (!navigator.bluetooth) {
+          alert('当前浏览器不支持Web Bluetooth API，请使用Chrome/Edge/Opera桌面版或Android Chrome。');
+          return;
+        }
+
+        updateStatus('🔵 正在搜索心率设备...');
+        
+        device = await navigator.bluetooth.requestDevice({
+          filters: [{ services: ['heart_rate'] }],
+          optionalServices: ['battery_service']
+        });
+
+        updateStatus('🟡 正在连接...');
+        const server = await device.gatt.connect();
+        const service = await server.getPrimaryService('heart_rate');
+        characteristic = await service.getCharacteristic('heart_rate_measurement');
+        
+        await characteristic.startNotifications();
+        characteristic.addEventListener('characteristicvaluechanged', handleHeartRateUpdate);
+        
+        updateStatus('🟢 已连接 · ' + device.name);
+        document.getElementById('connect-btn').disabled = true;
+        document.getElementById('disconnect-btn').disabled = false;
+        
+        device.addEventListener('gattserverdisconnected', onDisconnected);
+        
+      } catch (error) {
+        console.error(error);
+        updateStatus('🔴 连接失败');
+        // 用户取消是正常情况
+      }
+    }
+
+    function handleHeartRateUpdate(event) {
+      const value = event.target.value;
+      const flags = value.getUint8(0);
+      const rate16Bits = flags & 0x1;
+      let heartRate;
+      
+      if (rate16Bits) {
+        heartRate = value.getUint16(1, true);
+      } else {
+        heartRate = value.getUint8(1);
+      }
+      
+      // 更新UI大数字
+      document.getElementById('heart-rate-value').textContent = heartRate;
+      
+      // 更新波形图
+      addHeartRateToWaveform(heartRate);
+    }
+
+    function onDisconnected() {
+      updateStatus('⚪ 设备已断开');
+      resetUI();
+    }
+
+    function disconnectDevice() {
+      if (device && device.gatt.connected) {
+        device.gatt.disconnect();
+        updateStatus('⚪ 已断开连接');
+        resetUI();
+      }
+    }
+
+    function resetUI() {
+      document.getElementById('heart-rate-value').textContent = '--';
+      document.getElementById('connect-btn').disabled = false;
+      document.getElementById('disconnect-btn').disabled = true;
+    }
+
+    function updateStatus(message) {
+      document.getElementById('status').innerHTML = `<span>${message}</span>`;
+    }
+
+    // 窗口大小变化时重绘波形（保持比例）
+    window.addEventListener('resize', () => {
+      drawWaveform();
+    });
+  </script>
+</body>
+</html>
